@@ -48,5 +48,6 @@ data class NamedStompEndpoint(
         get() = name
 }
 
+fun Collection<StompEndpoint>.noServers() = none { it.type == StompEndpointType.SERVER }
 fun Collection<StompEndpoint>.anyClients() = any { it.type == StompEndpointType.CLIENT }
 fun Collection<StompEndpoint>.clients() = filter { it.type == StompEndpointType.CLIENT }

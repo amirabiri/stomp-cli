@@ -25,9 +25,6 @@ class StompCliServiceClientsImpl(
         for (endpoint in endpoints) {
             createStompSession(endpoint)
         }
-        while (true) {
-            Thread.sleep(1000)
-        }
     }
 
     private fun createStompSession(endpoint: StompEndpoint) {

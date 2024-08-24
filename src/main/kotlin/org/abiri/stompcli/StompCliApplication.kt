@@ -4,6 +4,7 @@ import org.abiri.stompcli.command.StompCliCommand
 import org.abiri.stompcli.converter.SimpleStringMessageConverter
 import org.abiri.stompcli.model.anyClients
 import org.abiri.stompcli.model.clients
+import org.abiri.stompcli.model.noServers
 import org.abiri.stompcli.service.StompCliReporter
 import org.abiri.stompcli.service.StompCliServiceClientsImpl
 import org.abiri.stompcli.service.StompCliServiceServerImpl
@@ -31,6 +32,7 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer
 import org.springframework.web.socket.config.annotation.WebSocketTransportRegistration
 import org.springframework.web.socket.messaging.WebSocketStompClient
+import java.util.concurrent.CountDownLatch
 
 val cliktCmd = StompCliCommand()
 fun main(args: Array<String>) {
@@ -44,6 +46,9 @@ fun main(args: Array<String>) {
         }
         if (endpoints.anyClients()) {
             StompCliClientsContext.run(rootCtxt, httpPort)
+        }
+        if (endpoints.noServers()) {
+            CountDownLatch(1).await()
         }
     }
 }
